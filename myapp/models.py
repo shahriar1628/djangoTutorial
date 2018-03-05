@@ -1,7 +1,22 @@
+from cffi import model
 from django.db import models
 
 class Person(models.Model):
     firstName = models.CharField(max_length = 30)
     lastName = models.CharField(max_length=30)
+
+
+
+class Section(models.Model):
+    sectionName = models.CharField(max_length=30)
+    totalcapacity = models.IntegerField()
+
+class student(models.Model):
+    rollNumber = models.CharField(max_length = 30)
+    meritStatus = models.IntegerField()
+    person = models.OneToOneField(Person,on_delete=models.CASCADE)
+    section = models.ForeignKey(Section)
+
+
 
 # Create your models here.
