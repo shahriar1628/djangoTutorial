@@ -15,7 +15,7 @@ class student(models.Model):
     rollNumber = models.CharField(max_length = 30)
     meritStatus = models.IntegerField()
     person = models.OneToOneField(Person,on_delete=models.CASCADE)
-    section = models.ForeignKey(Section)
+    section = models.ForeignKey(Section, on_delete=models.PROTECT)
 
 
 

@@ -16,8 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 import myapp.views as views
+from django.urls import path
+from myapp.views import printStudent
+from myapp.views import sectionStudent
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hello/', views.hello),
+    #url(r'^students/', printStudent.as_view()),
+    path('students/<section>/', sectionStudent.as_view()),
 ]
