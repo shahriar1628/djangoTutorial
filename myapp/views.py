@@ -25,7 +25,7 @@ def get_name (reqest):
     if(reqest.method == 'POST'):
         form = NameForm(reqest.POST)
         if(form.is_valid()):
-            person = Person(form.cleaned_data)
+            person = Person.create(form.cleaned_data['firstName'], form.cleaned_data['lasName'])
             person.save()
             print("hello world!!!!!")
             print(form.cleaned_data)
