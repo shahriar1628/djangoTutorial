@@ -4,14 +4,23 @@ from django.db import models
 class Person(models.Model):
     firstName = models.CharField(max_length = 30)
     lastName = models.CharField(max_length=30)
-    def create(cls, firstName,lastame):
-        person = cls(firstName = firstName, lastame = lastame)
+
+    @classmethod
+    def create(cls, firstName,lastName):
+        person = cls(firstName = firstName, lastName = lastName)
         return person
 
 
 
 
+class Book(models.Model):
+    title = models.CharField(max_length=100)
 
+    @classmethod
+    def create(cls, title):
+        book = cls(title=title)
+        # do something with the book
+        return book
 
 
 class Section(models.Model):
