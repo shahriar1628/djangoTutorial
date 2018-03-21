@@ -26,10 +26,10 @@ class sectionStudent(ListView):
 def get_name (reqest):
     print("enter")
     if(reqest.method == 'POST'):
-        form = NameForm(reqest.POST)
+        form = NameForm(reqest.POST,reqest.FILES)
         if(form.is_valid()):
             print(form.cleaned_data)
-            person = Person.create(form.cleaned_data['firstName'], form.cleaned_data['lastName'],form.cleaned_data['picture'])
+            person = Person.create(form.cleaned_data['firstName'], form.cleaned_data['lastName'],form.cleaned_data['picture'],form.cleaned_data['profileVideo'])
 
             person.save()
             print("hello world!!!!!")

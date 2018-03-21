@@ -5,11 +5,12 @@ class Person(models.Model):
     firstName = models.CharField(max_length = 30)
     lastName = models.CharField(max_length=30)
     picture = models.ImageField(upload_to='pictures/',null=True)
+    video = models.FileField(upload_to='videos/',null=True)
 
 
     @classmethod
-    def create(cls, firstName,lastName,picture):
-        person = cls(firstName = firstName, lastName = lastName,picture=picture)
+    def create(cls, firstName,lastName,picture,video):
+        person = cls(firstName = firstName, lastName = lastName,picture=picture,video=video)
         return person
 
 

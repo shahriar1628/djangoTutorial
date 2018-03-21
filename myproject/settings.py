@@ -73,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
+MEDIA_ROOT = 'D:/djangoTutorial/media/'
 
 
 # Database
