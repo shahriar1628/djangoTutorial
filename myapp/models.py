@@ -4,10 +4,12 @@ from django.db import models
 class Person(models.Model):
     firstName = models.CharField(max_length = 30)
     lastName = models.CharField(max_length=30)
+    picture = models.ImageField(upload_to='pictures/',null=True)
+
 
     @classmethod
-    def create(cls, firstName,lastName):
-        person = cls(firstName = firstName, lastName = lastName)
+    def create(cls, firstName,lastName,picture):
+        person = cls(firstName = firstName, lastName = lastName,picture=picture)
         return person
 
 
