@@ -20,6 +20,8 @@ def hello(request):
 def language(request, language = 'en-gb'):
     responce = HttpResponse('settings language to %s' %language)
     responce.set_cookie('lang',language)
+    if('firstName' in request.session):
+        del request.session['firstName']
     return  responce
 
 
@@ -32,11 +34,13 @@ class sectionStudent(ListView):
         self.section = get_object_or_404(Section,sectionName=self.kwargs['section'])
         return student.objects.filter(section = self.section)
 def get_name (reqest):
-    print("enter")
+    if('firstName' in reqest.session):
+       return HttpResponseRedirect('/thanks')
     if(reqest.method == 'POST'):
         form = NameForm(reqest.POST,reqest.FILES)
         if(form.is_valid()):
             print(form.cleaned_data)
+            reqest.session['firstName'] = form.cleaned_data['firstName']
             person = Person.create(form.cleaned_data['firstName'], form.cleaned_data['lastName'],form.cleaned_data['picture'],form.cleaned_data['profileVideo'])
             person.save()
             print(form.cleaned_data)

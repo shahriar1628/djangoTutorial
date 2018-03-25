@@ -23,7 +23,7 @@ from myapp.views import sectionStudent
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hello/', views.hello),
-    url(r'^language/', views.language),
+    url(r'^refresh/', views.language),
     url(r'^thanks/', views.hello),
     url(r'^your-name/', views.get_name),
     url(r'^students/', printStudent.as_view()),
