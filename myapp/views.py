@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView
 from myapp.models import student
 from django.shortcuts import get_object_or_404
@@ -7,13 +7,21 @@ from myapp.models import Section
 from myapp.models import Book
 from myapp.models import Person
 from .forms import NameForm
+import datetime
+from django.template import RequestContext
 # Create your views here.
 def hello(request):
     param = dict()
-    book = Book.create("Pride and Prejudice")
-    book.save()
-    param['today'] = '2/20/2018'
-    return render(request, "hello.html", param)
+    language = 'bdt'
+    if('lang' in request.COOKIES):
+        language = request.COOKIES['lang']
+    return render_to_response('hello.html',{'language' :language,'today': '3-25-2017'})
+        
+def language(request, language = 'en-gb'):
+    responce = HttpResponse('settings language to %s' %language)
+    responce.set_cookie('lang',language)
+    return  responce
+
 
 class printStudent(ListView):
     model = student
@@ -30,12 +38,11 @@ def get_name (reqest):
         if(form.is_valid()):
             print(form.cleaned_data)
             person = Person.create(form.cleaned_data['firstName'], form.cleaned_data['lastName'],form.cleaned_data['picture'],form.cleaned_data['profileVideo'])
-
             person.save()
-            print("hello world!!!!!")
             print(form.cleaned_data)
             return HttpResponseRedirect('/thanks')
     else:
         form = NameForm()
-
     return render(reqest,'name.html',{'form':form})
+
+
