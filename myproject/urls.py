@@ -28,4 +28,6 @@ urlpatterns = [
     url(r'^your-name/', views.get_name),
     url(r'^students/', printStudent.as_view()),
     path('section/<section>/', sectionStudent.as_view()),
+    url(r'^video', views.HomeView.as_view(), ),
+    url(r'^embedvideo', views.embedVideo),
 ]
