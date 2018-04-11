@@ -13,12 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 import myapp.views as views
 from django.urls import path
 from myapp.views import printStudent
 from myapp.views import sectionStudent
+from myapp.api import StudentResource
+
+student_resource = StudentResource()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,4 +33,5 @@ urlpatterns = [
     path('section/<section>/', sectionStudent.as_view()),
     url(r'^video', views.HomeView.as_view(), ),
     url(r'^embedvideo', views.embedVideo),
+    url(r'^api/',include(student_resource.urls) ),
 ]
