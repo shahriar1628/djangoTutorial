@@ -20,8 +20,12 @@ from django.urls import path
 from myapp.views import printStudent
 from myapp.views import sectionStudent
 from myapp.api import StudentResource
+from myapp.api import SectionResource
+from myapp.api import PersonResource
 
 student_resource = StudentResource()
+person_resource = PersonResource()
+section_resource = SectionResource()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,5 +37,7 @@ urlpatterns = [
     path('section/<section>/', sectionStudent.as_view()),
     url(r'^video', views.HomeView.as_view(), ),
     url(r'^embedvideo', views.embedVideo),
-    url(r'^api/',include(student_resource.urls) ),
+    url(r'^api/v1/',include(student_resource.urls) ),
+    url(r'^api/v1/',include(person_resource.urls) ),
+    url(r'^api/v1/',include(section_resource.urls) ),
 ]
